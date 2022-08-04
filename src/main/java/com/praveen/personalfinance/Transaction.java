@@ -8,17 +8,29 @@ import java.util.Date;
 
 @Data
 public class Transaction {
-    private Date transDate;
+    private Date transactionDate;
     private String transactor;
-    private double transAmount;
-    private String transNote;
+    private double transactionAmount;
+    private String transactionNote;
+    private TransactionCategory transactionCategory;
     private boolean isIncome;
 
     public Transaction(String input) {
-        transDate = extractDate(input);
+        transactionDate = extractDate(input);
         transactor = extractName(input);
-        transAmount = extractAmount(input);
-        transNote = extractNote(input);
+        transactionAmount = extractAmount(input);
+        transactionNote = extractNote(input);
+        transactionCategory = extractCategory(input);
+    }
+
+    private TransactionCategory extractCategory(String input) {
+        String[] inputArr = input.split("\\s+");
+        for(int i = 1; i < inputArr.length; i++) {
+            if("-ctg".equals(inputArr[i-1])) {
+                return TransactionCategory.getCategoryByCode(inputArr[i]);
+            }
+        }
+        return null;
     }
 
     private Date extractDate(String input) {

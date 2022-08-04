@@ -1,4 +1,5 @@
 import com.praveen.personalfinance.Transaction;
+import com.praveen.personalfinance.TransactionCategory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -31,7 +32,7 @@ public class TransactionTest {
             e.printStackTrace();
         }
 
-        assertEquals(expectedDate, transaction.getTransDate());
+        assertEquals(expectedDate, transaction.getTransactionDate());
     }
 
     @Test
@@ -44,15 +45,22 @@ public class TransactionTest {
     @Test
     void transactionAmount_Test() {
         double expectedAmount = 2000;
-        double actualAmount = transaction.getTransAmount();
+        double actualAmount = transaction.getTransactionAmount();
         assertEquals(expectedAmount, actualAmount);
     }
 
     @Test
     void transactionNote_test() {
         String expectedNote = "lunch";
-        String actualNote = transaction.getTransNote();
+        String actualNote = transaction.getTransactionNote();
         assertEquals(expectedNote, actualNote);
+    }
+
+    @Test
+    void transactionCategory_test() {
+        TransactionCategory expectedCategory = TransactionCategory.ESSENTIALS;
+        TransactionCategory actualCategory = transaction.getTransactionCategory();
+        assertEquals(expectedCategory, actualCategory);
     }
 
 }
